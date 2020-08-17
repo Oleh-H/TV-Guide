@@ -30,11 +30,11 @@ class DataModel {
         if scrollDirection == -1, let firstID = showItems.first?.id {
             //to the top
             borderID = firstID
-            loadingVisualization.runLoadingIndicator()
+            loadingVisualization.runLoadingIndicator(scrollDirrection: scrollDirection)
         } else if scrollDirection == 1, let lastID = showItems.last?.id {
             //to the bottom
             borderID = lastID
-            loadingVisualization.runLoadingIndicator()
+            loadingVisualization.runLoadingIndicator(scrollDirrection: scrollDirection)
         }
         network.getShowItems(borderID: borderID, direction: scrollDirection) { [weak self] (tvGuideData) in
             self?.appendNewItems(items: tvGuideData.items, scrollDirection: scrollDirection)

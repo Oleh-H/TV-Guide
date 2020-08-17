@@ -23,7 +23,7 @@ class TVShowsViewController: UIViewController, UITableViewDelegate {
         tableView.prefetchDataSource = self
         
         dataModel = DataModel(tableView: tableView)
-        dataModel?.loadingVisualization.runLoadingIndicator()
+        dataModel?.loadingVisualization.runLoadingIndicator(scrollDirrection: -1)
         
         tableViewScrollPosition = TableViewScrollPosition(tableInitialOffsetPoint: true, dataModel: dataModel)
         

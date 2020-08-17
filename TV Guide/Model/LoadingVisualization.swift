@@ -13,13 +13,17 @@ class LoadingVisualization {
     var tableView: UITableView?
     let loadingIndicator = LoadingIndicator(style: .large)
     
-    func runLoadingIndicator() {
+    func runLoadingIndicator(scrollDirrection: Int) {
         DispatchQueue.main.async {
-            guard let tableViewCenter = self.tableView?.center else { return }
-//            debugPrint(tableViewCenter)
+
+            guard let tableWidth = self.tableView?.frame.size.width, let tableHeight = self.tableView?.frame.size.height else {return}
+            if scrollDirrection == -1 {
+                self.loadingIndicator.center = CGPoint(x: tableWidth / 2, y: tableHeight / 2)
+            } else if scrollDirrection == 1, let contentHeight = self.tableView?.contentSize.height {
+                self.loadingIndicator.center = CGPoint(x: tableWidth / 2, y: contentHeight - (tableHeight / 2))
+            }
             self.loadingIndicator.startAnimating()
             self.loadingIndicator.tag = 100
-            self.loadingIndicator.center = tableViewCenter
             self.tableView?.addSubview(self.loadingIndicator)
             self.tableView?.isUserInteractionEnabled = false
         }
